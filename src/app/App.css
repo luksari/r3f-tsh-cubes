@@ -54,3 +54,14 @@
 .app__main {
   padding: 2rem 1rem;
 }
+
+.app__scene  {
+  width: 100%;
+  height: 100%;
+
+}
+
+.app__scene canvas {
+  width: 100%;
+  height: 100%;
+}
