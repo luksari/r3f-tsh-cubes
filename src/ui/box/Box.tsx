@@ -4,21 +4,22 @@ import { MeshProps, useFrame } from 'react-three-fiber';
 type BoxProps = {
   size?: [number, number, number];
   color?: string;
+  boxSpeed?: number;
 } & MeshProps;
 
-export const Box = ({ size = [1, 1, 1], color = '#FFFFFF', ...meshProps }: BoxProps) => {
+export const Box = ({ size = [1, 1, 1], color = '#FFFFFF', boxSpeed = 0.01, ...meshProps }: BoxProps) => {
   const boxRef = useRef<MeshProps | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
 
-  // It is react-three-fiber way to trigger animation, each frame we are changing x, y, z rotation of our box
+  // It is react-three-fiber way to trigger animation
+  // each frame we are changing x, y, z rotation of our box
   useFrame(() => {
     if (!boxRef.current) {
       return;
     }
-    boxRef.current.rotation.x += 0.01;
-    boxRef.current.rotation.y -= 0.01;
-    boxRef.current.rotation.z += 0.01;
+    boxRef.current.rotation.x += boxSpeed;
+    boxRef.current.rotation.y += boxSpeed;
   });
   // it is color memo which indicates state of an item
   const calculatedColor = useMemo(() => {
